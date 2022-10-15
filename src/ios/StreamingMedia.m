@@ -233,7 +233,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     [movie play];
 
-    commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
+    commandCenter = MPRemoteCommandCenter.shared()
 
     commandCenter.previousTrackCommand.enabled = false;
     commandCenter.nextTrackCommand.enabled = false;
