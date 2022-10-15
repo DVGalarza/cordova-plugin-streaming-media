@@ -214,30 +214,32 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     movie                  =  [AVPlayer playerWithURL:url];
     
     // handle orientation
-    [self handleOrientation];
+    // [self handleOrientation];
     
     // handle gestures
-    [self handleGestures];
+    // [self handleGestures];
     
-    [moviePlayer setPlayer:movie];
-    [moviePlayer setShowsPlaybackControls:controls];
-    [moviePlayer setUpdatesNowPlayingInfoCenter:YES];
+    // [moviePlayer setPlayer:movie];
+    // [moviePlayer setShowsPlaybackControls:controls];
+    // [moviePlayer setUpdatesNowPlayingInfoCenter:YES];
     
-    if(@available(iOS 11.0, *)) { [moviePlayer setEntersFullScreenWhenPlaybackBegins:YES]; }
+    // if(@available(iOS 11.0, *)) { [moviePlayer setEntersFullScreenWhenPlaybackBegins:YES]; }
     
     // present modally so we get a close button
-    [self.viewController presentViewController:moviePlayer animated:YES completion:^(void){
-        [moviePlayer.player play];
-    }];
+    // [self.viewController presentViewController:moviePlayer animated:YES completion:^(void){
+    //     [moviePlayer.player play];
+    // }];
+
+    [movie play];
     
     // add audio image and background color
     if ([videoType isEqualToString:TYPE_AUDIO]) {
         if (imageView != nil) {
-            [moviePlayer.contentOverlayView setAutoresizesSubviews:YES];
-            [moviePlayer.contentOverlayView addSubview:imageView];
+            // [moviePlayer.contentOverlayView setAutoresizesSubviews:YES];
+            // [moviePlayer.contentOverlayView addSubview:imageView];
         }
-        moviePlayer.contentOverlayView.backgroundColor = backgroundColor;
-        [self.viewController.view addSubview:moviePlayer.view];
+        // moviePlayer.contentOverlayView.backgroundColor = backgroundColor;
+        // [self.viewController.view addSubview:moviePlayer.view];
     }
     
     // setup listners
