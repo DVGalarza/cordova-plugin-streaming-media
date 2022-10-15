@@ -231,6 +231,17 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     // }];
 
     [movie play];
+
+    let commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
+
+    commandCenter.previousTrackCommand.enabled = false;
+    commandCenter.nextTrackCommand.enabled = false;
+
+    commandCenter.playCommand.enabled = true
+    commandCenter.playCommand.addTarget(self, action: "resumePlayer")
+
+    commandCenter.pauseCommand.enabled = true
+    commandCenter.pauseCommand.addTarget(self, action: "pausePlayer")
     
     // add audio image and background color
     if ([videoType isEqualToString:TYPE_AUDIO]) {
@@ -244,6 +255,14 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     
     // setup listners
     [self handleListeners];
+}
+
+- (void) pausePlayer {
+    [movie pause];
+}
+
+- (void) resumePlayer {
+    [movie play];
 }
 
 - (void) handleListeners {
