@@ -27,7 +27,7 @@
     NSString *videoType;
     AVPlayer *movie;
     BOOL controls;
-    MPRemoteCommandCenter commandCenter;
+    MPRemoteCommandCenter *commandCenter;
 }
 
 NSString * const TYPE_VIDEO = @"VIDEO";
