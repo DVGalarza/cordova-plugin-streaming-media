@@ -27,6 +27,7 @@
     NSString *videoType;
     AVPlayer *movie;
     BOOL controls;
+    MPRemoteCommandCenter commandCenter;
 }
 
 NSString * const TYPE_VIDEO = @"VIDEO";
@@ -232,7 +233,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     [movie play];
 
-    let commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
+    commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
 
     commandCenter.previousTrackCommand.enabled = false;
     commandCenter.nextTrackCommand.enabled = false;
