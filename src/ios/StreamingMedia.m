@@ -143,7 +143,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleInterruption:)
-                                                 name:AVAudioSession.interruptionNotification
+                                                 name:AVAudioSessionInterruptionNotification
                                                object:nil];
 
     /* Listen for click on the "Done" button
