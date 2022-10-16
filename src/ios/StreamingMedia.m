@@ -242,8 +242,8 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     commandCenter.playCommand.enabled = true;
     [commandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
-        if (self.movie.rate == 0.0) {
-            [self.movie play];
+        if (self->movie.rate == 0.0) {
+            [self->movie play];
             return MPRemoteCommandHandlerStatusSuccess;
         }
         return MPRemoteCommandHandlerStatusCommandFailed;
@@ -252,8 +252,8 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     commandCenter.pauseCommand.enabled = true;
     [commandCenter.pauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
-        if (self.movie.rate == 0.0) {
-            [self.movie pause];
+        if (self->movie.rate == 0.0) {
+            [self->movie pause];
             return MPRemoteCommandHandlerStatusSuccess;
         }
         return MPRemoteCommandHandlerStatusCommandFailed;
