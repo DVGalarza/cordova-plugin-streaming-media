@@ -245,6 +245,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     commandCenter.playCommand.enabled = true;
     [commandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        NSLog(@"lock screen play called");
         if (self->movie.rate == 0.0) {
             [self->movie play];
             return MPRemoteCommandHandlerStatusSuccess;
@@ -255,6 +256,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     commandCenter.pauseCommand.enabled = true;
     [commandCenter.pauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        NSLog(@"lock screen pause called");
         if (self->movie.rate == 0.0) {
             [self->movie pause];
             return MPRemoteCommandHandlerStatusSuccess;
