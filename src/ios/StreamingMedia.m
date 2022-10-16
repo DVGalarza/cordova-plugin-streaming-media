@@ -140,7 +140,12 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
                                              selector:@selector(playbackRateDidChange:)
                                                  name:AVPlayerRateDidChangeNotification
                                                object:movie];
-                                               
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleInterruption:)
+                                                 name:AVAudioSession.interruptionNotification
+                                               object:nil];
+
     /* Listen for click on the "Done" button
      
      // Deprecated.. AVPlayerController doesn't offer a "Done" listener... thanks apple. We'll listen for an error when playback finishes
@@ -149,6 +154,28 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
      name:MPMoviePlayerWillExitFullscreenNotification
      object:nil];
      */
+}
+
+- (void) handleInterruption:(NSNotification*)notification {
+    guard let info = notification.userInfo,
+        let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
+        let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+            return
+    }
+    if type == .began {
+        // Interruption began, take appropriate actions (save state, update user interface)
+        self.avPlayer.pause()
+    } else if type == .ended {
+        guard let optionsValue =
+            info[AVAudioSessionInterruptionOptionKey] as? UInt else {
+                return
+        }
+        let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+        if options.contains(.shouldResume) {
+            // Interruption Ended - playback should resume
+            self.avPlayer.play()
+        }
+    }
 }
 
 - (void) appDidEnterBackground:(NSNotification*)notification {
