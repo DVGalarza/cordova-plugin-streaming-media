@@ -154,7 +154,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
-    NSLog(@"Playback did finish with auto close being %d, and error message being %@", notification.userInfo);
+    NSLog(@"Playback did finish with error message being %@", notification.userInfo);
     NSDictionary *notificationUserInfo = [notification userInfo];
     NSNumber *errorValue = [notificationUserInfo objectForKey:AVPlayerItemFailedToPlayToEndTimeErrorKey];
     NSString *errorMsg;
