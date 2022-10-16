@@ -157,8 +157,8 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 }
 
 - (void) handleInterruption:(NSNotification*)notification {
-    NSLog(@"handleInterruption", notification);
-    guard let info = notification.userInfo,
+    NSLog(@"handleInterruption");
+    let info = notification.userInfo,
         let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
         let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
             return
