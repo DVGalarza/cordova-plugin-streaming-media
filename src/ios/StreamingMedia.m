@@ -197,14 +197,14 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
      name:AVPlayerItemDidPlayToEndTimeNotification
-     object:player.currentItem];
+     object:movie.currentItem];
     // Remove playback finished error listener
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
      name:AVPlayerItemFailedToPlayToEndTimeNotification
-     object:player.currentItem];
+     object:movie.currentItem];
     
-    if (movie.rate != 0.0;) {
+    if (movie.rate != 0.0) {
         [movie pause];
         movie = nil;
     }
