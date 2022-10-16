@@ -14,13 +14,7 @@
 
 @implementation StreamingMedia {
     NSString* callbackId;
-    BOOL shouldAutoClose;
-    UIColor *backgroundColor;
-    UIImageView *imageView;
-    BOOL initFullscreen;
-    NSString *videoType;
     AVPlayer *movie;
-    BOOL controls;
 }
 
 NSString * const TYPE_VIDEO = @"VIDEO";
@@ -160,7 +154,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
-    NSLog(@"Playback did finish with auto close being %d, and error message being %@", shouldAutoClose, notification.userInfo);
+    NSLog(@"Playback did finish with auto close being %d, and error message being %@", notification.userInfo);
     NSDictionary *notificationUserInfo = [notification userInfo];
     NSNumber *errorValue = [notificationUserInfo objectForKey:AVPlayerItemFailedToPlayToEndTimeErrorKey];
     NSString *errorMsg;
@@ -174,7 +168,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
         NSLog(@"Playback failed: %@", errorMsg);
     }
     
-    if (shouldAutoClose || [errorMsg length] != 0) {
+    // if ([errorMsg length] != 0) {
         [self cleanup];
         CDVPluginResult* pluginResult;
         if ([errorMsg length] != 0) {
@@ -183,15 +177,12 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:true];
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-    }
+    // }
 }
 
 
 - (void)cleanup {
     NSLog(@"Clean up called");
-    imageView = nil;
-    initFullscreen = false;
-    backgroundColor = nil;
     
     // Remove playback finished listener
     [[NSNotificationCenter defaultCenter]
