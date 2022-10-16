@@ -115,6 +115,11 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [self play:command type:[NSString stringWithString:TYPE_AUDIO]];
 }
 
+-(void)pauseAudio:(CDVInvokedUrlCommand *) command {
+    NSLog(@"pauseaudio called");
+    [self pausePlayer];
+}
+
 -(void)stopAudio:(CDVInvokedUrlCommand *) command {
     [self stop:command type:[NSString stringWithString:TYPE_AUDIO]];
 }
@@ -234,8 +239,6 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     // Get the shared command center.
     MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
-
-
 
     commandCenter.previousTrackCommand.enabled = false;
     commandCenter.nextTrackCommand.enabled = false;
