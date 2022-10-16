@@ -236,10 +236,10 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [MPRemoteCommandCenter sharedCommandCenter].nextTrackCommand.enabled = false;
 
     [MPRemoteCommandCenter sharedCommandCenter].playCommand.enabled = true;
-    // [MPRemoteCommandCenter sharedCommandCenter].playCommand.addTarget(self, action: "resumePlayer");
+    [MPRemoteCommandCenter sharedCommandCenter].playCommand.addTarget(self, action: "resumePlayer");
 
     [MPRemoteCommandCenter sharedCommandCenter].pauseCommand.enabled = true;
-    // [MPRemoteCommandCenter sharedCommandCenter].pauseCommand.addTarget(self, action: "pausePlayer");
+    [MPRemoteCommandCenter sharedCommandCenter].pauseCommand.addTarget(self, action: "pausePlayer");
     
     // add audio image and background color
     if ([videoType isEqualToString:TYPE_AUDIO]) {
