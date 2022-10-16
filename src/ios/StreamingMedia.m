@@ -160,6 +160,9 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     NSLog(@"handleInterruption %@", notification);
     // UInt8 typeValue = notification.userInfo[AVAudioSessionInterruptionTypeKey];
 
+    if (notification.userInfo.AVAudioSessionInterruptionTypeKey == 1) {
+        NSLog(@"interruption started");
+    }
     // if (AVAudioSession.InterruptionType(typeValue) == .began) {
     //     // Interruption began, take appropriate actions (save state, update user interface)
     //     [movie pause];
