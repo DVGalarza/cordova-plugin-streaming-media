@@ -232,14 +232,33 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     [movie play];
 
-    [MPRemoteCommandCenter sharedCommandCenter].previousTrackCommand.enabled = false;
-    [MPRemoteCommandCenter sharedCommandCenter].nextTrackCommand.enabled = false;
+    // Get the shared command center.
+    MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
 
-    [MPRemoteCommandCenter sharedCommandCenter].playCommand.enabled = true;
-    [MPRemoteCommandCenter sharedCommandCenter].playCommand.addTarget(self, action: "resumePlayer");
 
-    [MPRemoteCommandCenter sharedCommandCenter].pauseCommand.enabled = true;
-    [MPRemoteCommandCenter sharedCommandCenter].pauseCommand.addTarget(self, action: "pausePlayer");
+
+    commandCenter.previousTrackCommand.enabled = false;
+    commandCenter.nextTrackCommand.enabled = false;
+
+    commandCenter.playCommand.enabled = true;
+    [commandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        if (self.movie.rate == 0.0) {
+            [self.movie play];
+            return MPRemoteCommandHandlerStatusSuccess;
+        }
+        return MPRemoteCommandHandlerStatusCommandFailed;
+    }];
+    // commandCenter.playCommand.addTarget(self, action: "resumePlayer");
+
+    commandCenter.pauseCommand.enabled = true;
+    [commandCenter.pauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        if (self.movie.rate == 0.0) {
+            [self.movie pause];
+            return MPRemoteCommandHandlerStatusSuccess;
+        }
+        return MPRemoteCommandHandlerStatusCommandFailed;
+    }];
+    // commandCenter.pauseCommand.addTarget(self, action: "pausePlayer");
     
     // add audio image and background color
     if ([videoType isEqualToString:TYPE_AUDIO]) {
