@@ -134,7 +134,13 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
                                              selector:@selector(moviePlayBackDidFinish:)
                                                  name:AVPlayerItemFailedToPlayToEndTimeNotification
                                                object:movie.currentItem];
-    
+
+    // Listen for playback rate change
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playbackRateDidChange:)
+                                                 name:AVPlayerRateDidChangeNotification
+                                               object:movie];
+                                               
     /* Listen for click on the "Done" button
      
      // Deprecated.. AVPlayerController doesn't offer a "Done" listener... thanks apple. We'll listen for an error when playback finishes
@@ -151,6 +157,10 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
 - (void) appDidBecomeActive:(NSNotification*)notification {
     NSLog(@"appDidBecomeActive");
+}
+
+- (void) playbackRateDidChange:(NSNotification*)notification {
+    NSLog(@"playbackRateDidChange");
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
