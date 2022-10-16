@@ -136,10 +136,10 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
                                                object:movie.currentItem];
 
     // Listen for playback rate change
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playbackRateDidChange:)
-                                                 name:AVPlayerRateDidChangeNotification
-                                               object:movie];
+    // [[NSNotificationCenter defaultCenter] addObserver:self
+    //                                          selector:@selector(playbackRateDidChange:)
+    //                                              name:AVPlayerRateDidChangeNotification
+    //                                            object:movie];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleInterruption:)
@@ -157,6 +157,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 }
 
 - (void) handleInterruption:(NSNotification*)notification {
+    NSLog(@"handleInterruption", notification);
     guard let info = notification.userInfo,
         let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
         let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
