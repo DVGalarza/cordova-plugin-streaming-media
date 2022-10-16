@@ -158,17 +158,17 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
 - (void) handleInterruption:(NSNotification*)notification {
     NSLog(@"handleInterruption %@", notification);
-    UInt8 typeValue = notification.userInfo[AVAudioSessionInterruptionTypeKey];
+    // UInt8 typeValue = notification.userInfo[AVAudioSessionInterruptionTypeKey];
 
-    if (AVAudioSession.InterruptionType(typeValue) == .began) {
-        // Interruption began, take appropriate actions (save state, update user interface)
-        [movie pause];
-    } else if (AVAudioSession.InterruptionType(typeValue) == .ended) {
-        if (AVAudioSession.InterruptionOptions(info[AVAudioSessionInterruptionOptionKey] as? UInt8).contains(.shouldResume)) {
-            // Interruption Ended - playback should resume
-            [movie play];
-        }
-    }
+    // if (AVAudioSession.InterruptionType(typeValue) == .began) {
+    //     // Interruption began, take appropriate actions (save state, update user interface)
+    //     [movie pause];
+    // } else if (AVAudioSession.InterruptionType(typeValue) == .ended) {
+    //     if (AVAudioSession.InterruptionOptions(info[AVAudioSessionInterruptionOptionKey] as? UInt8).contains(.shouldResume)) {
+    //         // Interruption Ended - playback should resume
+    //         [movie play];
+    //     }
+    // }
 }
 
 - (void) appDidEnterBackground:(NSNotification*)notification {
