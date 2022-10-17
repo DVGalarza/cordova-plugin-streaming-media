@@ -14,7 +14,7 @@
 
 @implementation StreamingMedia {
     NSString* callbackId;
-    AVPlayer *movie;
+    AVPlayer *avPlayer;
 }
 
 NSString * const TYPE_VIDEO = @"VIDEO";
@@ -32,8 +32,8 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 -(void)stop:(CDVInvokedUrlCommand *) command type:(NSString *) type {
     NSLog(@"stop called");
     callbackId = command.callbackId;
-    if (movie.rate != 0.0) {
-        [movie pause];
+    if (avPlayer.rate != 0.0) {
+        [avPlayer pause];
     }
 }
 
@@ -67,9 +67,9 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 -(void)startPlayer:(NSString*)uri {
     NSLog(@"startplayer called");
     NSURL *url             =  [NSURL URLWithString:uri];
-    movie                  =  [AVPlayer playerWithURL:url];
+    avPlayer                  =  [AVPlayer playerWithURL:url];
 
-    [movie play];
+    [avPlayer play];
 
     // Get the shared command center.
     MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
@@ -80,8 +80,8 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     commandCenter.playCommand.enabled = true;
     [commandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
         NSLog(@"lock screen play called");
-        if (self->movie.rate == 0.0) {
-            [self->movie play];
+        if (self->avPlayer.rate == 0.0) {
+            [self->avPlayer play];
             return MPRemoteCommandHandlerStatusSuccess;
         }
         return MPRemoteCommandHandlerStatusCommandFailed;
@@ -90,8 +90,8 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     commandCenter.pauseCommand.enabled = true;
     [commandCenter.pauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
         NSLog(@"lock screen pause called");
-        if (self->movie.rate != 0.0) {
-            [self->movie pause];
+        if (self->avPlayer.rate != 0.0) {
+            [self->avPlayer pause];
             return MPRemoteCommandHandlerStatusSuccess;
         }
         return MPRemoteCommandHandlerStatusCommandFailed;
@@ -102,11 +102,13 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 }
 
 - (void) pausePlayer {
-    [movie pause];
+    NSLog(@"pausePlayer called");
+    [avPlayer pause];
 }
 
 - (void) resumePlayer {
-    [movie play];
+    NSLog(@"resumePlayer called");
+    [avPlayer play];
 }
 
 - (void) handleListeners {
@@ -127,13 +129,13 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(moviePlayBackDidFinish:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:movie.currentItem];
+                                               object:avPlayer.currentItem];
     
     // Listen for errors
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(moviePlayBackDidFinish:)
                                                  name:AVPlayerItemFailedToPlayToEndTimeNotification
-                                               object:movie.currentItem];
+                                               object:avPlayer.currentItem];
 
     // Listen for playback rate change
     // [[NSNotificationCenter defaultCenter] addObserver:self
@@ -158,20 +160,16 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
 - (void) handleInterruption:(NSNotification*)notification {
     NSLog(@"handleInterruption %@", notification);
-    // UInt8 typeValue = notification.userInfo[AVAudioSessionInterruptionTypeKey];
+    NSDictionary *notificationUserInfo = [notification userInfo];
+    NSNumber *interruptionType = [notificationUserInfo objectForKey:AVAudioSessionInterruptionTypeKey];
 
-    if (notification.userInfo.AVAudioSessionInterruptionTypeKey == 1) {
+    if ([interruptionType intValue] == 1) {
         NSLog(@"interruption started");
+        [avPlayer pause];
+    } else if ([interruptionType intValue] == 0) {
+        NSLog(@"interruption ended");
+        [avPlayer play];
     }
-    // if (AVAudioSession.InterruptionType(typeValue) == .began) {
-    //     // Interruption began, take appropriate actions (save state, update user interface)
-    //     [movie pause];
-    // } else if (AVAudioSession.InterruptionType(typeValue) == .ended) {
-    //     if (AVAudioSession.InterruptionOptions(info[AVAudioSessionInterruptionOptionKey] as? UInt8).contains(.shouldResume)) {
-    //         // Interruption Ended - playback should resume
-    //         [movie play];
-    //     }
-    // }
 }
 
 - (void) appDidEnterBackground:(NSNotification*)notification {
@@ -221,16 +219,16 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
      name:AVPlayerItemDidPlayToEndTimeNotification
-     object:movie.currentItem];
+     object:avPlayer.currentItem];
     // Remove playback finished error listener
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
      name:AVPlayerItemFailedToPlayToEndTimeNotification
-     object:movie.currentItem];
+     object:avPlayer.currentItem];
     
-    if (movie.rate != 0.0) {
-        [movie pause];
-        movie = nil;
+    if (avPlayer.rate != 0.0) {
+        [avPlayer pause];
+        avPlayer = nil;
     }
 }
 @end
