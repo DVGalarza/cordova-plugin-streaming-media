@@ -51,7 +51,12 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
 -(void)pauseAudio:(CDVInvokedUrlCommand *) command {
     NSLog(@"pauseAudio called");
-    [self pausePlayer];
+    [avPlayer pause];
+}
+
+-(void)resumeAudio:(CDVInvokedUrlCommand *) command {
+    NSLog(@"resumeAudio called");
+    [avPlayer play];
 }
 
 -(void)stopAudio:(CDVInvokedUrlCommand *) command {
@@ -100,16 +105,6 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     
     // setup listners
     [self handleListeners];
-}
-
-- (void) pausePlayer {
-    NSLog(@"pausePlayer called");
-    [avPlayer pause];
-}
-
-- (void) resumePlayer {
-    NSLog(@"resumePlayer called");
-    [avPlayer play];
 }
 
 - (void) handleListeners {

@@ -9,5 +9,6 @@
 - (void)playVideo:(CDVInvokedUrlCommand*)command;
 - (void)playAudio:(CDVInvokedUrlCommand*)command;
 - (void)pauseAudio:(CDVInvokedUrlCommand*)command;
+- (void)resumeAudio:(CDVInvokedUrlCommand*)command;
 
 @end
