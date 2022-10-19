@@ -44,17 +44,18 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 }
 
 -(void)playAudio:(CDVInvokedUrlCommand *) command {
-    NSLog(@"playaudio called");
+    NSLog(@"playAudio called");
     [self ignoreMute];
     [self play:command type:[NSString stringWithString:TYPE_AUDIO]];
 }
 
 -(void)pauseAudio:(CDVInvokedUrlCommand *) command {
-    NSLog(@"pauseaudio called");
+    NSLog(@"pauseAudio called");
     [self pausePlayer];
 }
 
 -(void)stopAudio:(CDVInvokedUrlCommand *) command {
+    NSLog(@"stopAudio called");
     [self stop:command type:[NSString stringWithString:TYPE_AUDIO]];
 }
 
