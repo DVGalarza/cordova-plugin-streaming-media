@@ -2,7 +2,6 @@ package com.hutchind.cordova.plugins.streamingmedia;
 
 import android.app.Activity;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.media.AudioManager;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -10,11 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.ImageView;
-import android.view.View;
-import android.view.Window;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.MediaController;
 
 public class SimpleAudioStream extends Activity implements
@@ -24,63 +18,15 @@ MediaController.MediaPlayerControl {
 
 	private String TAG = getClass().getSimpleName();
 	private MediaPlayer mMediaPlayer = null;
-	// private MediaController mMediaController = null;
-	// private LinearLayout mAudioView;
-	// private View mMediaControllerView;
 	private String mAudioUrl;
 	private Boolean mShouldAutoClose = true;
 
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		Bundle b = getIntent().getExtras();
 		mAudioUrl = b.getString("mediaUrl");
-		String backgroundColor = b.getString("bgColor");
-		String backgroundImagePath = b.getString("bgImage");
-		String backgroundImageScale = b.getString("bgImageScale");
 		mShouldAutoClose = b.getBoolean("shouldAutoClose", true);
-		backgroundImageScale = backgroundImageScale == null ? "center" : backgroundImageScale.toLowerCase();
-		ImageView.ScaleType bgImageScaleType;
-		// Default background to black
-		int bgColor = Color.BLACK;
-		if (backgroundColor != null) {
-			bgColor = Color.parseColor(backgroundColor);
-		}
-
-		if (backgroundImageScale.equals("fit")) {
-			bgImageScaleType = ImageView.ScaleType.FIT_CENTER;
-		} else if (backgroundImageScale.equals("stretch")) {
-			bgImageScaleType = ImageView.ScaleType.FIT_XY;
-		} else {
-			bgImageScaleType = ImageView.ScaleType.CENTER;
-		}
-
-		// RelativeLayout audioView = new RelativeLayout(this);
-		// audioView.setBackgroundColor(bgColor);
-
-		// if (backgroundImagePath != null) {
-		// 	ImageView bgImage = new ImageView(this);
-		// 	new ImageLoadTask(backgroundImagePath, bgImage, getApplicationContext()).execute(null, null);
-		// 	RelativeLayout.LayoutParams bgImageLayoutParam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-		// 	bgImageLayoutParam.addRule(RelativeLayout.CENTER_IN_PARENT);
-		// 	bgImage.setLayoutParams(bgImageLayoutParam);
-		// 	bgImage.setScaleType(bgImageScaleType);
-		// 	audioView.addView(bgImage);
-		// }
-
-		// RelativeLayout.LayoutParams relLayoutParam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-		// mMediaControllerView = new View(this);
-		// audioView.addView(mMediaControllerView);
-		// setContentView(audioView, relLayoutParam);
-
-
-		// stop the screen from going to sleep. keepawake parameter from javascript. default is true.
-		// mMediaControllerView.setKeepScreenOn(true);
-		// Boolean keepAwake = b.getBoolean("keepAwake", true);
-		// if (keepAwake == false) {
-		// 	mMediaControllerView.setKeepScreenOn(false);
-		// } 
 
 		play();
 	}
@@ -105,7 +51,6 @@ MediaController.MediaPlayerControl {
 			mMediaPlayer.setOnBufferingUpdateListener(this);
 			mMediaPlayer.setOnErrorListener(this);
 			mMediaPlayer.setScreenOnWhilePlaying(true);
-			// mMediaController = new MediaController(this);
 
 			mMediaPlayer.prepareAsync();
 
@@ -118,11 +63,7 @@ MediaController.MediaPlayerControl {
 	@Override
 	public void onPrepared(MediaPlayer mp) {
 		Log.d(TAG, "Stream is prepared");
-		// mMediaController.setMediaPlayer(this);
-		// mMediaController.setAnchorView(mMediaControllerView);
 		mMediaPlayer.start();
-		// mMediaController.setEnabled(true);
-		// mMediaController.show();
 	}
 
 	@Override
