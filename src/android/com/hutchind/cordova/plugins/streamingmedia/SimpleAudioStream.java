@@ -24,9 +24,9 @@ MediaController.MediaPlayerControl {
 
 	private String TAG = getClass().getSimpleName();
 	private MediaPlayer mMediaPlayer = null;
-	private MediaController mMediaController = null;
-	private LinearLayout mAudioView;
-	private View mMediaControllerView;
+	// private MediaController mMediaController = null;
+	// private LinearLayout mAudioView;
+	// private View mMediaControllerView;
 	private String mAudioUrl;
 	private Boolean mShouldAutoClose = true;
 
@@ -56,31 +56,31 @@ MediaController.MediaPlayerControl {
 			bgImageScaleType = ImageView.ScaleType.CENTER;
 		}
 
-		RelativeLayout audioView = new RelativeLayout(this);
-		audioView.setBackgroundColor(bgColor);
+		// RelativeLayout audioView = new RelativeLayout(this);
+		// audioView.setBackgroundColor(bgColor);
 
-		if (backgroundImagePath != null) {
-			ImageView bgImage = new ImageView(this);
-			new ImageLoadTask(backgroundImagePath, bgImage, getApplicationContext()).execute(null, null);
-			RelativeLayout.LayoutParams bgImageLayoutParam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-			bgImageLayoutParam.addRule(RelativeLayout.CENTER_IN_PARENT);
-			bgImage.setLayoutParams(bgImageLayoutParam);
-			bgImage.setScaleType(bgImageScaleType);
-			audioView.addView(bgImage);
-		}
+		// if (backgroundImagePath != null) {
+		// 	ImageView bgImage = new ImageView(this);
+		// 	new ImageLoadTask(backgroundImagePath, bgImage, getApplicationContext()).execute(null, null);
+		// 	RelativeLayout.LayoutParams bgImageLayoutParam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+		// 	bgImageLayoutParam.addRule(RelativeLayout.CENTER_IN_PARENT);
+		// 	bgImage.setLayoutParams(bgImageLayoutParam);
+		// 	bgImage.setScaleType(bgImageScaleType);
+		// 	audioView.addView(bgImage);
+		// }
 
-		RelativeLayout.LayoutParams relLayoutParam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-		mMediaControllerView = new View(this);
-		audioView.addView(mMediaControllerView);
-		setContentView(audioView, relLayoutParam);
+		// RelativeLayout.LayoutParams relLayoutParam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+		// mMediaControllerView = new View(this);
+		// audioView.addView(mMediaControllerView);
+		// setContentView(audioView, relLayoutParam);
 
 
 		// stop the screen from going to sleep. keepawake parameter from javascript. default is true.
-		mMediaControllerView.setKeepScreenOn(true);
-		Boolean keepAwake = b.getBoolean("keepAwake", true);
-		if (keepAwake == false) {
-			mMediaControllerView.setKeepScreenOn(false);
-		} 
+		// mMediaControllerView.setKeepScreenOn(true);
+		// Boolean keepAwake = b.getBoolean("keepAwake", true);
+		// if (keepAwake == false) {
+		// 	mMediaControllerView.setKeepScreenOn(false);
+		// } 
 
 		play();
 	}
@@ -105,7 +105,7 @@ MediaController.MediaPlayerControl {
 			mMediaPlayer.setOnBufferingUpdateListener(this);
 			mMediaPlayer.setOnErrorListener(this);
 			mMediaPlayer.setScreenOnWhilePlaying(true);
-			mMediaController = new MediaController(this);
+			// mMediaController = new MediaController(this);
 
 			mMediaPlayer.prepareAsync();
 
@@ -118,11 +118,11 @@ MediaController.MediaPlayerControl {
 	@Override
 	public void onPrepared(MediaPlayer mp) {
 		Log.d(TAG, "Stream is prepared");
-		mMediaController.setMediaPlayer(this);
-		mMediaController.setAnchorView(mMediaControllerView);
+		// mMediaController.setMediaPlayer(this);
+		// mMediaController.setAnchorView(mMediaControllerView);
 		mMediaPlayer.start();
-		mMediaController.setEnabled(true);
-		mMediaController.show();
+		// mMediaController.setEnabled(true);
+		// mMediaController.show();
 	}
 
 	@Override
@@ -272,9 +272,9 @@ MediaController.MediaPlayerControl {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-	if (mMediaController != null) {
-		mMediaController.show();
-	}
+	// if (mMediaController != null) {
+	// 	mMediaController.show();
+	// }
 	return false;
 	}
 }
