@@ -37,6 +37,8 @@ public class StreamingMedia extends CordovaPlugin {
 			// Developer provided no options. Leave options null.
 		}
 
+		Log.v(TAG, "action called: " + action);
+
 		if (ACTION_PLAY_AUDIO.equals(action)) {
 			return playAudio(args.getString(0), options);
 		} else if (ACTION_PLAY_VIDEO.equals(action)) {
