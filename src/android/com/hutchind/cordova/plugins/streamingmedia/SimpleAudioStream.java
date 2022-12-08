@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ MediaController.MediaPlayerControl {
 	}
 
 	private void play() {
+		Log.d(TAG, "Testing to see if this was ACTUALLY hit...");
+
 		Uri myUri = Uri.parse(mAudioUrl);
 		try {
 			if (mMediaPlayer == null) {
@@ -50,7 +53,7 @@ MediaController.MediaPlayerControl {
 			mMediaPlayer.setOnCompletionListener(this);
 			mMediaPlayer.setOnBufferingUpdateListener(this);
 			mMediaPlayer.setOnErrorListener(this);
-			// mMediaPlayer.setScreenOnWhilePlaying(true);
+			mMediaPlayer.setScreenOnWhilePlaying(true);
 
 			mMediaPlayer.prepareAsync();
 
