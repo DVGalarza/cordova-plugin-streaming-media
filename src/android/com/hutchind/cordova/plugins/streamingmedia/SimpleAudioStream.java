@@ -36,7 +36,7 @@ MediaController.MediaPlayerControl {
 		Uri myUri = Uri.parse(mAudioUrl);
 		try {
 			if (mMediaPlayer == null) {
-				mMediaPlayer = new MediaPlayer();
+				mMediaPlayer = MediaPlayer.create(this, mAudioUrl);
 			} else {
 				try {
 					mMediaPlayer.stop();
@@ -45,7 +45,7 @@ MediaController.MediaPlayerControl {
 					Log.e(TAG, e.toString());
 				}
 			}
-			mMediaPlayer.setDataSource(this, myUri); // Go to Initialized state
+			// mMediaPlayer.setDataSource(this, myUri); // Go to Initialized state
 			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mMediaPlayer.setOnPreparedListener(this);
 			mMediaPlayer.setOnCompletionListener(this);
