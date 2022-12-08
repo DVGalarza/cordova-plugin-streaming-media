@@ -50,7 +50,7 @@ MediaController.MediaPlayerControl {
 			mMediaPlayer.setOnCompletionListener(this);
 			mMediaPlayer.setOnBufferingUpdateListener(this);
 			mMediaPlayer.setOnErrorListener(this);
-			mMediaPlayer.setScreenOnWhilePlaying(true);
+			// mMediaPlayer.setScreenOnWhilePlaying(true);
 
 			mMediaPlayer.prepareAsync();
 
