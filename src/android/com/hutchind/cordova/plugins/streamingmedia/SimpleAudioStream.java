@@ -33,8 +33,6 @@ MediaController.MediaPlayerControl {
 	}
 
 	private void play() {
-		Log.d(TAG, "Testing to see if this was ACTUALLY hit...");
-
 		Uri myUri = Uri.parse(mAudioUrl);
 		try {
 			if (mMediaPlayer == null) {

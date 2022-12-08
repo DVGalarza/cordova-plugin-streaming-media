@@ -57,6 +57,7 @@ public class StreamingMedia extends CordovaPlugin {
 	}
 
 	private boolean play(final Class activityClass, final String url, final JSONObject options) {
+		Log.d(TAG, "StreamingMedia: Testing to see if this was ACTUALLY hit...");
 		final CordovaInterface cordovaObj = cordova;
 		final CordovaPlugin plugin = this;
 
