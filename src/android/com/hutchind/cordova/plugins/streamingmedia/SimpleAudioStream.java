@@ -36,7 +36,7 @@ MediaController.MediaPlayerControl {
 		Uri myUri = Uri.parse(mAudioUrl);
 		try {
 			if (mMediaPlayer == null) {
-				mMediaPlayer = MediaPlayer.create(this, mAudioUrl);
+				mMediaPlayer = MediaPlayer.create(this, myUri);
 			} else {
 				try {
 					mMediaPlayer.stop();
