@@ -62,31 +62,31 @@ public class StreamingMedia extends CordovaPlugin {
 
 		cordova.getActivity().runOnUiThread(new Runnable() {
 			public void run() {
-				// final Intent streamIntent = new Intent(cordovaObj.getActivity().getApplicationContext(), activityClass);
-				// Bundle extras = new Bundle();
-				// extras.putString("mediaUrl", url);
+				final Intent streamIntent = new Intent(cordovaObj.getActivity().getApplicationContext(), activityClass);
+				Bundle extras = new Bundle();
+				extras.putString("mediaUrl", url);
 
-				// if (options != null) {
-				// 	Iterator<String> optKeys = options.keys();
-				// 	while (optKeys.hasNext()) {
-				// 		try {
-				// 			final String optKey = (String)optKeys.next();
-				// 			if (options.get(optKey).getClass().equals(String.class)) {
-				// 				extras.putString(optKey, (String)options.get(optKey));
-				// 				Log.v(TAG, "Added option: " + optKey + " -> " + String.valueOf(options.get(optKey)));
-				// 			} else if (options.get(optKey).getClass().equals(Boolean.class)) {
-				// 				extras.putBoolean(optKey, (Boolean)options.get(optKey));
-				// 				Log.v(TAG, "Added option: " + optKey + " -> " + String.valueOf(options.get(optKey)));
-				// 			}
+				if (options != null) {
+					Iterator<String> optKeys = options.keys();
+					while (optKeys.hasNext()) {
+						try {
+							final String optKey = (String)optKeys.next();
+							if (options.get(optKey).getClass().equals(String.class)) {
+								extras.putString(optKey, (String)options.get(optKey));
+								Log.v(TAG, "Added option: " + optKey + " -> " + String.valueOf(options.get(optKey)));
+							} else if (options.get(optKey).getClass().equals(Boolean.class)) {
+								extras.putBoolean(optKey, (Boolean)options.get(optKey));
+								Log.v(TAG, "Added option: " + optKey + " -> " + String.valueOf(options.get(optKey)));
+							}
 
-				// 		} catch (JSONException e) {
-				// 			Log.e(TAG, "JSONException while trying to read options. Skipping option.");
-				// 		}
-				// 	}
-				// 	streamIntent.putExtras(extras);
-				// }
+						} catch (JSONException e) {
+							Log.e(TAG, "JSONException while trying to read options. Skipping option.");
+						}
+					}
+					streamIntent.putExtras(extras);
+				}
 
-				// cordovaObj.startActivityForResult(plugin, streamIntent, ACTIVITY_CODE_PLAY_MEDIA);
+				cordovaObj.startActivityForResult(plugin, streamIntent, ACTIVITY_CODE_PLAY_MEDIA);
 			}
 		});
 		return true;
