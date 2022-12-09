@@ -25,12 +25,12 @@ MediaController.MediaPlayerControl {
 
 	@Override
 	public void onCreate(Bundle icicle) {
-		super.onCreate(icicle);
-		Bundle b = getIntent().getExtras();
-		mAudioUrl = b.getString("mediaUrl");
-		mShouldAutoClose = b.getBoolean("shouldAutoClose", true);
+		// super.onCreate(icicle);
+		// Bundle b = getIntent().getExtras();
+		// mAudioUrl = b.getString("mediaUrl");
+		// mShouldAutoClose = b.getBoolean("shouldAutoClose", true);
 
-		play();
+		// play();
 	}
 
 	private void play() {
