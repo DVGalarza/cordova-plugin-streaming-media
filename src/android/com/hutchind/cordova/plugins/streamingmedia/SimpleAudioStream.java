@@ -47,7 +47,8 @@ MediaController.MediaPlayerControl {
 				}
 			}
 			mMediaPlayer.setDataSource(this, myUri); // Go to Initialized state
-			mMediaPlayer.setAudioAttributes(AudioAttributes.USAGE_MEDIA);
+			// mMediaPlayer.setAudioAttributes(AudioAttributes.USAGE_MEDIA);
+			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mMediaPlayer.setOnPreparedListener(this);
 			mMediaPlayer.setOnCompletionListener(this);
 			mMediaPlayer.setOnBufferingUpdateListener(this);
