@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,8 +47,7 @@ MediaController.MediaPlayerControl {
 				}
 			}
 			mMediaPlayer.setDataSource(this, myUri); // Go to Initialized state
-			// mMediaPlayer.setAudioAttributes()
-			// mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+			mMediaPlayer.setAudioAttributes(AudioAttributes.USAGE_MEDIA);
 			mMediaPlayer.setOnPreparedListener(this);
 			mMediaPlayer.setOnCompletionListener(this);
 			mMediaPlayer.setOnBufferingUpdateListener(this);
