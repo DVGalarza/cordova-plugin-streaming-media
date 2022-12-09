@@ -60,7 +60,7 @@ public class StreamingMedia extends CordovaPlugin {
 		final CordovaInterface cordovaObj = cordova;
 		final CordovaPlugin plugin = this;
 
-		cordova.getActivity().runOnUiThread(new Runnable() {
+		cordova.getThreadPool().execute(new Runnable() {
 			public void run() {
 				final Intent streamIntent = new Intent(cordovaObj.getActivity().getApplicationContext(), activityClass);
 				Bundle extras = new Bundle();
