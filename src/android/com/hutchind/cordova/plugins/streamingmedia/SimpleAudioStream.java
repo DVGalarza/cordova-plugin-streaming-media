@@ -37,7 +37,8 @@ MediaController.MediaPlayerControl {
 		Uri myUri = Uri.parse(mAudioUrl);
 		try {
 			if (mMediaPlayer == null) {
-				mMediaPlayer = new MediaPlayer();
+
+				// mMediaPlayer = new MediaPlayer();
 			} else {
 				try {
 					mMediaPlayer.stop();
@@ -46,16 +47,16 @@ MediaController.MediaPlayerControl {
 					Log.e(TAG, e.toString());
 				}
 			}
-			mMediaPlayer.setDataSource(this, myUri); // Go to Initialized state
-			// mMediaPlayer.setAudioAttributes(AudioAttributes.USAGE_MEDIA);
-			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mMediaPlayer.setOnPreparedListener(this);
-			mMediaPlayer.setOnCompletionListener(this);
-			mMediaPlayer.setOnBufferingUpdateListener(this);
-			mMediaPlayer.setOnErrorListener(this);
-			mMediaPlayer.setScreenOnWhilePlaying(true);
+			// mMediaPlayer.setDataSource(this, myUri); // Go to Initialized state
+			// // mMediaPlayer.setAudioAttributes(AudioAttributes.USAGE_MEDIA);
+			// mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+			// mMediaPlayer.setOnPreparedListener(this);
+			// mMediaPlayer.setOnCompletionListener(this);
+			// mMediaPlayer.setOnBufferingUpdateListener(this);
+			// mMediaPlayer.setOnErrorListener(this);
+			// mMediaPlayer.setScreenOnWhilePlaying(true);
 
-			mMediaPlayer.prepareAsync();
+			// mMediaPlayer.prepareAsync();
 
 			Log.d(TAG, "LoadClip Done");
 		} catch (Throwable t) {
@@ -66,7 +67,7 @@ MediaController.MediaPlayerControl {
 	@Override
 	public void onPrepared(MediaPlayer mp) {
 		Log.d(TAG, "Stream is prepared");
-		mMediaPlayer.start();
+		// mMediaPlayer.start();
 	}
 
 	@Override
