@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.AudioAttributes;
 import android.net.Uri;
@@ -13,27 +12,26 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.MediaController;
 
-public class SimpleAudioStream extends Activity implements
+public class SimpleAudioStream implements
 MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener,
 MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener,
 MediaController.MediaPlayerControl {
 
 	private String TAG = getClass().getSimpleName();
 	private MediaPlayer mMediaPlayer = null;
-	private String mAudioUrl;
 	private Boolean mShouldAutoClose = true;
 
-	@Override
-	public void onCreate(Bundle icicle) {
-		super.onCreate(icicle);
-		Bundle b = getIntent().getExtras();
-		mAudioUrl = b.getString("mediaUrl");
-		mShouldAutoClose = b.getBoolean("shouldAutoClose", true);
+	// @Override
+	// public void onCreate(Bundle icicle) {
+	// 	super.onCreate(icicle);
+	// 	Bundle b = getIntent().getExtras();
+	// 	mAudioUrl = b.getString("mediaUrl");
+	// 	mShouldAutoClose = b.getBoolean("shouldAutoClose", true);
 
-		play();
-	}
+	// 	play();
+	// }
 
-	private void play() {
+	public void play(String mAudioUrl) {
 		Uri myUri = Uri.parse(mAudioUrl);
 		try {
 			if (mMediaPlayer == null) {
@@ -63,20 +61,20 @@ MediaController.MediaPlayerControl {
 		}
 	}
 
-	@Override
+	// @Override
 	public void onPrepared(MediaPlayer mp) {
 		Log.d(TAG, "Stream is prepared");
 		mMediaPlayer.start();
 	}
 
-	@Override
+	// @Override
 	public void start() {
 		if (mMediaPlayer!=null) {
 			mMediaPlayer.start();
 		}
 	}
 
-	@Override
+	// @Override
 	public void pause() {
 		if (mMediaPlayer!=null) {
 			try {
@@ -138,12 +136,12 @@ MediaController.MediaPlayerControl {
 		return true;
 	}
 
-	@Override
+	// @Override
 	public int getAudioSessionId() {
 		return 0;
 	}
 
-	@Override
+	// @Override
 	public void onDestroy() {
 		super.onDestroy();
 		if (mMediaPlayer!=null){
@@ -165,7 +163,7 @@ MediaController.MediaPlayerControl {
 	}
 
 
-	@Override
+	// @Override
 	public void onCompletion(MediaPlayer mp) {
 		stop();
 		if (mShouldAutoClose) {
@@ -204,17 +202,17 @@ MediaController.MediaPlayerControl {
 		Log.d(TAG, "PlayerService onBufferingUpdate : " + percent + "%");
 	}
 
-	@Override
+	// @Override
 	public void onBackPressed() {
 		wrapItUp(RESULT_OK, null);
 	}
 
-	@Override
+	// @Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 	}
 
-	@Override
+	// @Override
 	public boolean onTouchEvent(MotionEvent event) {
 	// if (mMediaController != null) {
 	// 	mMediaController.show();

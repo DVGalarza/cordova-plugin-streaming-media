@@ -29,6 +29,9 @@ public class StreamingMedia extends CordovaPlugin {
 
 	private static final String TAG = "StreamingMediaPlugin";
 
+	SimpleAudioStream audioStreamer = null;
+    private int origVolumeStream = -1;
+
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		this.callbackContext = callbackContext;
@@ -67,16 +70,34 @@ public class StreamingMedia extends CordovaPlugin {
 	}
 
 	private boolean playAudio(String url, JSONObject options) {
-		return play(SimpleAudioStream.class, url, options);
+		SimpleAudioStream streamer = getOrCreatePlayer();
+		if (audioStreamer) {
+			streamer.play(url);
+			return true;
+		}
+		return false;
+		// return play(SimpleAudioStream.class, url, options);
 	}
 	private boolean pauseAudio(String url, JSONObject options) {
-		return true;// play(SimpleAudioStream.class, url, options);
+		if (audioStreamer) {
+			audioStreamer.pause();
+			return true;
+		}
+		return false;// play(SimpleAudioStream.class, url, options);
 	}
 	private boolean resumeAudio(String url, JSONObject options) {
-		return true;// play(SimpleAudioStream.class, url, options);
+		if (audioStreamer) {
+			audioStreamer.start();
+			return true;
+		}
+		return false;// play(SimpleAudioStream.class, url, options);
 	}
 	private boolean stopAudio(String url, JSONObject options) {
-		return true;// play(SimpleAudioStream.class, url, options);
+		if (audioStreamer) {
+			audioStreamer.stop();
+			return true;
+		}
+		return false;// play(SimpleAudioStream.class, url, options);
 	}
 	private boolean playVideo(String url, JSONObject options) {
 		return play(SimpleVideoStream.class, url, options);
@@ -133,4 +154,17 @@ public class StreamingMedia extends CordovaPlugin {
 			}
 		}
 	}
+
+	private SimpleAudioStream getOrCreatePlayer() {
+		if (audioStreamer == null) {
+			onFirstPlayerCreated()
+			audioStreamer = new SimpleAudioStream();
+		}
+		return audioStreamer;
+	}
+
+    private void onFirstPlayerCreated() {
+        origVolumeStream = cordova.getActivity().getVolumeControlStream();
+        cordova.getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
+    }
 }
