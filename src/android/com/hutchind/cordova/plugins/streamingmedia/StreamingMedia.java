@@ -15,6 +15,7 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
+import android.media.AudioManager;
 
 public class StreamingMedia extends CordovaPlugin {
 	public static final String ACTION_PLAY_AUDIO = "playAudio";
