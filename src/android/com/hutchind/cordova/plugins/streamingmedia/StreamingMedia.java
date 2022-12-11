@@ -54,7 +54,7 @@ public class StreamingMedia extends CordovaPlugin {
 				return resumeAudio(args.getString(0), options);
 			}
 			case ACTION_STOP_AUDIO: {
-				return pauseAudio(args.getString(0), options);
+				return stopAudio(args.getString(0), options);
 			}
 			case ACTION_PLAY_VIDEO: {
 				return playVideo(args.getString(0), options);
