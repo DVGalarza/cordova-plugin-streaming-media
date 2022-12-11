@@ -157,7 +157,7 @@ public class StreamingMedia extends CordovaPlugin {
 
 	private SimpleAudioStream getOrCreatePlayer() {
 		if (audioStreamer == null) {
-			onFirstPlayerCreated()
+			onFirstPlayerCreated();
 			audioStreamer = new SimpleAudioStream();
 		}
 		return audioStreamer;
