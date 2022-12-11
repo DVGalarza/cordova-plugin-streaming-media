@@ -1,6 +1,6 @@
 "use strict";
 function StreamingMedia() {
-	this.id = cordova.utils.createUUID();
+	this.id = 'mediaPlayer';
 }
 
 function getOptions(streamingMedia, srcOptions) {
