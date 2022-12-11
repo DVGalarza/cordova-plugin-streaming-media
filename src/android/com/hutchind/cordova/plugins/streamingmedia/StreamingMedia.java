@@ -70,13 +70,13 @@ public class StreamingMedia extends CordovaPlugin {
 		return play(SimpleAudioStream.class, url, options);
 	}
 	private boolean pauseAudio(String url, JSONObject options) {
-		return false;// play(SimpleAudioStream.class, url, options);
+		return true;// play(SimpleAudioStream.class, url, options);
 	}
 	private boolean resumeAudio(String url, JSONObject options) {
-		return false;// play(SimpleAudioStream.class, url, options);
+		return true;// play(SimpleAudioStream.class, url, options);
 	}
 	private boolean stopAudio(String url, JSONObject options) {
-		return false;// play(SimpleAudioStream.class, url, options);
+		return true;// play(SimpleAudioStream.class, url, options);
 	}
 	private boolean playVideo(String url, JSONObject options) {
 		return play(SimpleVideoStream.class, url, options);
