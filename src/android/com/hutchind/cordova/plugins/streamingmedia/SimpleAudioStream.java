@@ -32,7 +32,7 @@ MediaController.MediaPlayerControl {
 	// }
 
 	public void play(String mAudioUrl) {
-		Uri myUri = Uri.parse(mAudioUrl);
+		// Uri myUri = Uri.parse(mAudioUrl);
 		try {
 			if (mMediaPlayer == null) {
 				mMediaPlayer = new MediaPlayer();
@@ -44,7 +44,7 @@ MediaController.MediaPlayerControl {
 					Log.e(TAG, e.toString());
 				}
 			}
-			mMediaPlayer.setDataSource(myUri); // Go to Initialized state
+			mMediaPlayer.setDataSource(mAudioUrl); // Go to Initialized state
 			// mMediaPlayer.setAudioAttributes(AudioAttributes.USAGE_MEDIA);
 			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mMediaPlayer.setOnPreparedListener(this::onPrepared);
@@ -194,7 +194,7 @@ MediaController.MediaPlayerControl {
 		sb.append(" (" + what + ") ");
 		sb.append(extra);
 		Log.e(TAG, sb.toString());
-		wrapItUp(RESULT_CANCELED, sb.toString());
+		// wrapItUp(RESULT_CANCELED, sb.toString());
 		return true;
 	}
 

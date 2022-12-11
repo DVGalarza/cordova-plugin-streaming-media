@@ -72,7 +72,7 @@ public class StreamingMedia extends CordovaPlugin {
 
 	private boolean playAudio(String url, JSONObject options) {
 		SimpleAudioStream streamer = getOrCreatePlayer();
-		if (audioStreamer) {
+		if (audioStreamer != null) {
 			streamer.play(url);
 			return true;
 		}
@@ -80,21 +80,21 @@ public class StreamingMedia extends CordovaPlugin {
 		// return play(SimpleAudioStream.class, url, options);
 	}
 	private boolean pauseAudio(String url, JSONObject options) {
-		if (audioStreamer) {
+		if (audioStreamer != null) {
 			audioStreamer.pause();
 			return true;
 		}
 		return false;// play(SimpleAudioStream.class, url, options);
 	}
 	private boolean resumeAudio(String url, JSONObject options) {
-		if (audioStreamer) {
+		if (audioStreamer != null) {
 			audioStreamer.start();
 			return true;
 		}
 		return false;// play(SimpleAudioStream.class, url, options);
 	}
 	private boolean stopAudio(String url, JSONObject options) {
-		if (audioStreamer) {
+		if (audioStreamer != null) {
 			audioStreamer.stop();
 			return true;
 		}
