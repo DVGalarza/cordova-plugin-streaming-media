@@ -18,6 +18,9 @@ import org.apache.cordova.PluginResult;
 
 public class StreamingMedia extends CordovaPlugin {
 	public static final String ACTION_PLAY_AUDIO = "playAudio";
+	public static final String ACTION_PAUSE_AUDIO = "pauseAudio";
+	public static final String ACTION_RESUME_AUDIO = "resumeAudio";
+	public static final String ACTION_STOP_AUDIO = "stopAudio";
 	public static final String ACTION_PLAY_VIDEO = "playVideo";
 
 	private static final int ACTIVITY_CODE_PLAY_MEDIA = 7;
@@ -41,7 +44,17 @@ public class StreamingMedia extends CordovaPlugin {
 
 		switch(action) {
 			case ACTION_PLAY_AUDIO: {
+				Log.d(TAG, "Got an id: " + options.id)
 				return playAudio(args.getString(0), options);
+			}
+			case ACTION_PAUSE_AUDIO: {
+				return pauseAudio(args.getString(0), options);
+			}
+			case ACTION_RESUME_AUDIO: {
+				return resumeAudio(args.getString(0), options);
+			}
+			case ACTION_STOP_AUDIO: {
+				return pauseAudio(args.getString(0), options);
 			}
 			case ACTION_PLAY_VIDEO: {
 				return playVideo(args.getString(0), options);
@@ -51,19 +64,19 @@ public class StreamingMedia extends CordovaPlugin {
 				return false;
 			}
 		}
-
-		// if (ACTION_PLAY_AUDIO.equals(action)) {
-		// 	return playAudio(args.getString(0), options);
-		// } else if (ACTION_PLAY_VIDEO.equals(action)) {
-		// 	return playVideo(args.getString(0), options);
-		// } else {
-		// 	callbackContext.error("streamingMedia." + action + " is not a supported method.");
-		// 	return false;
-		// }
 	}
 
 	private boolean playAudio(String url, JSONObject options) {
 		return play(SimpleAudioStream.class, url, options);
+	}
+	private boolean pauseAudio(String url, JSONObject options) {
+		return false;// play(SimpleAudioStream.class, url, options);
+	}
+	private boolean resumeAudio(String url, JSONObject options) {
+		return false;// play(SimpleAudioStream.class, url, options);
+	}
+	private boolean stopAudio(String url, JSONObject options) {
+		return false;// play(SimpleAudioStream.class, url, options);
 	}
 	private boolean playVideo(String url, JSONObject options) {
 		return play(SimpleVideoStream.class, url, options);
