@@ -44,13 +44,13 @@ MediaController.MediaPlayerControl {
 					Log.e(TAG, e.toString());
 				}
 			}
-			mMediaPlayer.setDataSource(this, myUri); // Go to Initialized state
+			mMediaPlayer.setDataSource(myUri); // Go to Initialized state
 			// mMediaPlayer.setAudioAttributes(AudioAttributes.USAGE_MEDIA);
 			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mMediaPlayer.setOnPreparedListener(this);
-			mMediaPlayer.setOnCompletionListener(this);
-			mMediaPlayer.setOnBufferingUpdateListener(this);
-			mMediaPlayer.setOnErrorListener(this);
+			mMediaPlayer.setOnPreparedListener(this::onPrepared);
+			mMediaPlayer.setOnCompletionListener(this::onCompletion);
+			mMediaPlayer.setOnBufferingUpdateListener(this::onBufferingUpdate);
+			mMediaPlayer.setOnErrorListener(this::onError);
 			mMediaPlayer.setScreenOnWhilePlaying(true);
 
 			mMediaPlayer.prepareAsync();
@@ -85,7 +85,7 @@ MediaController.MediaPlayerControl {
 		}
 	}
 
-	private void stop() {
+	public void stop() {
 		if (mMediaPlayer!=null) {
 			try {
 				mMediaPlayer.stop();
@@ -143,7 +143,7 @@ MediaController.MediaPlayerControl {
 
 	// @Override
 	public void onDestroy() {
-		super.onDestroy();
+		// super.onDestroy();
 		if (mMediaPlayer!=null){
 			try {
 				mMediaPlayer.reset();
@@ -158,8 +158,8 @@ MediaController.MediaPlayerControl {
 	private void wrapItUp(int resultCode, String message) {
 		Intent intent = new Intent();
 		intent.putExtra("message", message);
-		setResult(resultCode, intent);
-		finish();
+		// setResult(resultCode, intent);
+		// finish();
 	}
 
 
@@ -168,7 +168,7 @@ MediaController.MediaPlayerControl {
 		stop();
 		if (mShouldAutoClose) {
 			Log.v(TAG, "FINISHING ACTIVITY");
-			wrapItUp(RESULT_OK, null);
+			// wrapItUp(RESULT_OK, null);
 		}
 
 	}
@@ -204,12 +204,12 @@ MediaController.MediaPlayerControl {
 
 	// @Override
 	public void onBackPressed() {
-		wrapItUp(RESULT_OK, null);
+		// wrapItUp(RESULT_OK, null);
 	}
 
 	// @Override
 	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
+		// super.onConfigurationChanged(newConfig);
 	}
 
 	// @Override
