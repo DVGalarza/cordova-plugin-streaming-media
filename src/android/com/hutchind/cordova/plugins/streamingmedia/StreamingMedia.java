@@ -39,14 +39,27 @@ public class StreamingMedia extends CordovaPlugin {
 
 		Log.d(TAG, "action called: " + action);
 
-		if (ACTION_PLAY_AUDIO.equals(action)) {
-			return playAudio(args.getString(0), options);
-		} else if (ACTION_PLAY_VIDEO.equals(action)) {
-			return playVideo(args.getString(0), options);
-		} else {
-			callbackContext.error("streamingMedia." + action + " is not a supported method.");
-			return false;
+		switch(action) {
+			case ACTION_PLAY_AUDIO: {
+				return playAudio(args.getString(0), options);
+			}
+			case ACTION_PLAY_VIDEO: {
+				return playVideo(args.getString(0), options);
+			}
+			default: {
+				callbackContext.error("streamingMedia." + action + " is not a supported method.");
+				return false;
+			}
 		}
+
+		// if (ACTION_PLAY_AUDIO.equals(action)) {
+		// 	return playAudio(args.getString(0), options);
+		// } else if (ACTION_PLAY_VIDEO.equals(action)) {
+		// 	return playVideo(args.getString(0), options);
+		// } else {
+		// 	callbackContext.error("streamingMedia." + action + " is not a supported method.");
+		// 	return false;
+		// }
 	}
 
 	private boolean playAudio(String url, JSONObject options) {
