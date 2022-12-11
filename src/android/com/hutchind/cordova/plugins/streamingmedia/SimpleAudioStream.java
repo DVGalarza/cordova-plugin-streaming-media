@@ -21,16 +21,6 @@ MediaController.MediaPlayerControl {
 	private MediaPlayer mMediaPlayer = null;
 	private Boolean mShouldAutoClose = true;
 
-	// @Override
-	// public void onCreate(Bundle icicle) {
-	// 	super.onCreate(icicle);
-	// 	Bundle b = getIntent().getExtras();
-	// 	mAudioUrl = b.getString("mediaUrl");
-	// 	mShouldAutoClose = b.getBoolean("shouldAutoClose", true);
-
-	// 	play();
-	// }
-
 	public void play(String mAudioUrl) {
 		// Uri myUri = Uri.parse(mAudioUrl);
 		try {
@@ -38,7 +28,7 @@ MediaController.MediaPlayerControl {
 				mMediaPlayer = new MediaPlayer();
 			} else {
 				try {
-					mMediaPlayer.stop();
+					stop();
 					mMediaPlayer.reset();
 				} catch (Exception e) {
 					Log.e(TAG, e.toString());
@@ -64,20 +54,21 @@ MediaController.MediaPlayerControl {
 	// @Override
 	public void onPrepared(MediaPlayer mp) {
 		Log.d(TAG, "Stream is prepared");
-		mMediaPlayer.start();
+		start();
 	}
 
 	// @Override
 	public void start() {
-		if (mMediaPlayer!=null) {
+		if (mMediaPlayer != null) {
 			mMediaPlayer.start();
 		}
 	}
 
 	// @Override
 	public void pause() {
-		if (mMediaPlayer!=null) {
+		if (mMediaPlayer != null) {
 			try {
+				Log.d
 				mMediaPlayer.pause();
 			} catch (Exception e) {
 				Log.d(TAG, e.toString());
@@ -86,7 +77,7 @@ MediaController.MediaPlayerControl {
 	}
 
 	public void stop() {
-		if (mMediaPlayer!=null) {
+		if (mMediaPlayer != null) {
 			try {
 				mMediaPlayer.stop();
 			} catch (Exception e) {
@@ -96,21 +87,21 @@ MediaController.MediaPlayerControl {
 	}
 
 	public int getDuration() {
-		return (mMediaPlayer!=null) ? mMediaPlayer.getDuration() : 0;
+		return (mMediaPlayer != null) ? mMediaPlayer.getDuration() : 0;
 	}
 
 	public int getCurrentPosition() {
-		return (mMediaPlayer!=null) ? mMediaPlayer.getCurrentPosition() : 0;
+		return (mMediaPlayer != null) ? mMediaPlayer.getCurrentPosition() : 0;
 	}
 
 	public void seekTo(int i) {
-		if (mMediaPlayer!=null) {
+		if (mMediaPlayer != null) {
 			mMediaPlayer.seekTo(i);
 		}
 	}
 
 	public boolean isPlaying() {
-		if (mMediaPlayer!=null) {
+		if (mMediaPlayer != null) {
 			try {
 				return mMediaPlayer.isPlaying();
 			} catch (Exception e) {
@@ -144,7 +135,7 @@ MediaController.MediaPlayerControl {
 	// @Override
 	public void onDestroy() {
 		// super.onDestroy();
-		if (mMediaPlayer!=null){
+		if (mMediaPlayer != null){
 			try {
 				mMediaPlayer.reset();
 				mMediaPlayer.release();
@@ -161,7 +152,6 @@ MediaController.MediaPlayerControl {
 		// setResult(resultCode, intent);
 		// finish();
 	}
-
 
 	// @Override
 	public void onCompletion(MediaPlayer mp) {
@@ -214,9 +204,9 @@ MediaController.MediaPlayerControl {
 
 	// @Override
 	public boolean onTouchEvent(MotionEvent event) {
-	// if (mMediaController != null) {
-	// 	mMediaController.show();
-	// }
-	return false;
+		// if (mMediaController != null) {
+		// 	mMediaController.show();
+		// }
+		return false;
 	}
 }
