@@ -68,7 +68,6 @@ MediaController.MediaPlayerControl {
 	public void pause() {
 		if (mMediaPlayer != null) {
 			try {
-				Log.d
 				mMediaPlayer.pause();
 			} catch (Exception e) {
 				Log.d(TAG, e.toString());
