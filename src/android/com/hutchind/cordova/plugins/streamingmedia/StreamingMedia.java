@@ -44,7 +44,7 @@ public class StreamingMedia extends CordovaPlugin {
 
 		switch(action) {
 			case ACTION_PLAY_AUDIO: {
-				Log.d(TAG, "Got an id: " + options.id)
+				Log.d(TAG, "Got an id: " + options.id);
 				return playAudio(args.getString(0), options);
 			}
 			case ACTION_PAUSE_AUDIO: {
